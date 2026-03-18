@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct RatesResponse: Codable {
+   
+       let base: String
+       let date: String
+       let rates: [String: Double]
+    
+}

@@ -11,7 +11,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		FF8E60D52F69C730000BCC19 /* CurrencyConverter */ = {
+		FF8E60ED2F69C766000BCC19 /* CurrencyConverter */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = CurrencyConverter;
 			sourceTree = "<group>";
@@ -32,7 +32,7 @@
 		FF8E60CA2F69C730000BCC19 = {
 			isa = PBXGroup;
 			children = (
-				FF8E60D52F69C730000BCC19 /* CurrencyConverter */,
+				FF8E60ED2F69C766000BCC19 /* CurrencyConverter */,
 				FF8E60D42F69C730000BCC19 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,7 +61,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				FF8E60D52F69C730000BCC19 /* CurrencyConverter */,
+				FF8E60ED2F69C766000BCC19 /* CurrencyConverter */,
 			);
 			name = CurrencyConverter;
 			packageProductDependencies = (
