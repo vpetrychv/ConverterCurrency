@@ -11,34 +11,45 @@ import Combine
 
 @MainActor
 class ViewModel: ObservableObject {
-    //MARK: - Propirties
+    
+    //MARK: - Properties
     @Published var rates: [String: Double] = [:]
     @Published var fromCurrency: String = "USD"
     @Published var toCurrency: String = "EUR"
     
-    private var api = CurrencyAPI()
+    private let api = CurrencyAPI()
+    private let flagService = FlagService()
     
     var currencies: [String] {
-           rates.keys.sorted()
-       }
+        rates.keys.sorted()
+    }
     
-    //MARK: - Loading Rates
+    //MARK: - Load Rates
     func loadRates() async {
         do {
             let response = try await api.fetchRates()
-            
             rates = response.rates
             rates["USD"] = 1.0
-            
         } catch {
             print("Error:", error)
         }
     }
-    //MARK: -  Swaping Buttons Currencies
+    
+    //MARK: - Swap
     func swapCurrencies() {
         let temp = fromCurrency
         fromCurrency = toCurrency
         toCurrency = temp
+    }
+    
+    //MARK: - Convert
+    func convert(amount: Double, from: String, to: String) -> Double? {
+        guard let fromRate = rates[from],
+              let toRate = rates[to] else {
+            return nil
+        }
+        
+        return amount * (toRate / fromRate)
     }
     
     //MARK: - Formatted Result
@@ -51,13 +62,12 @@ class ViewModel: ObservableObject {
         return String(format: "%.2f", result)
     }
     
-    //MARK: - Convert
-    func convert(amount: Double, from: String, to: String) -> Double? {
-        guard let fromRate = rates[from],
-              let toRate = rates[to] else {
-            return nil
-        }
-
-        return amount * (toRate / fromRate)
+    //MARK: - Flags
+    func flag(for currency: String) -> String {
+        flagService.flagEmoji(from: currency)
+    }
+    
+    func flagURL(for currency: String) -> URL? {
+        flagService.flagURL(from: currency)
     }
 }
